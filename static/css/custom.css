@@ -1,0 +1,29 @@
+body{
+  padding: 0;
+  margin: 0;
+}
+
+.hero{
+  height: 200px; 
+  background-color: #5274FF;
+}
+.hero .hero-title{
+  font-size: 50px; 
+  color: #EEE; 
+  padding-top: 65px; 
+  padding-left: 50px;
+}
+.content{
+  margin: 0 10%;
+}
+
+.player{
+  display: block;
+  clear: both;
+}
+.playerName {
+  float: left;
+}
+.deletePlayer form{
+  float: left;
+}

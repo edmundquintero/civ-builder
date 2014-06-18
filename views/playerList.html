@@ -1,0 +1,37 @@
+  <div class='row-fluid' id='statsDisplay-container'>
+    <div class='span12' id='statsDisplay'>
+      <h3 id='statsDisplayCharName'></h3>
+      <ul id='statsDisplayList'>
+      </ul>
+    </div>
+  </div>
+  <div>
+
+    <form method='POST' action='/player'>
+      <label>Name:</label>
+      <input type='text' name='name'/>
+      <button type='submit'>Create</button>
+    </form>
+
+    <h1>Player List</h1>
+  </div>
+  <hr />
+
+  <div>
+    {{#each players}}
+    <div class='player'>
+      <div class='deletePlayer'>
+        <form method='POST' action='/player'>
+          <input type='hidden' name='_method' value='delete' />
+          <input type='hidden' name='id' value='{{this._id}}' />
+          <button type='submit'> X </button>
+        </form>
+      </div>
+      <div class='playerName'>
+        <strong>Name:</strong> {{this.name}} 
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+
