@@ -1,8 +1,9 @@
 var Player = require('../models/player.js');
 
 exports.post = function(req, res){
-  new Player({name: req.body.name}).save();
-  res.redirect('/player');
+  new Player({name: req.body.name}).save(function(err, player){
+    res.send(200, {player: player});
+  });
 };
 
 exports.delete = function(req, res){
@@ -21,6 +22,7 @@ exports.get = function(req, res){
 
 exports.list = function(req, res){
    Player.find({},function(err, players) {
+
     res.render('playerList', { players:players });
   });
 };
