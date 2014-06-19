@@ -45,10 +45,6 @@ sio.sockets.on('connection', function(socket){
     socket.emit('newPlayer', player);
   });
 
-
-
-
-
   console.log("A socket connected!");
 });
 

@@ -36,10 +36,10 @@ $('form#newPlayer').on('submit', function(e){
   });
 
 
+});
+
 $('.deletePlayer').on('submit', 'form', function(e){
   e.preventDefault();
   console.log($(this).children('input[name=name]').val());
 });
 
-
-});
