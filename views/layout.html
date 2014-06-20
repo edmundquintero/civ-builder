@@ -15,12 +15,26 @@
 
   <div class="hero">
     <div class="hero-title">Civ Builder</div>
+    <a class="login">Login</a>
   </div>
 
 </header>
   <div class="content">
-    {{{body}}}
+    <div class="main">
+      {{{body}}}
+    </div>
+    <div class="left-bar">
+      <div class="chat-container">
+        <h3>Chat</h3>
+        <div class="chat-box"></div>
+        <form id="chatForm">
+          <input type="text" name="message" />
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </div>
   </div>
+  
 
   <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.0.4.js"></script>

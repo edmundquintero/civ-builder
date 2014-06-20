@@ -51,6 +51,12 @@ sio.sockets.on('connection', function(socket){
     socket.emit('playerRemoved', player);
   });
 
+  //temp Chat
+  socket.on('newMessage', function(message){
+    socket.broadcast.emit('newMessage', message);
+    socket.emit('newMessage', message);
+  });
+
 
   console.log("A socket connected!");
 });

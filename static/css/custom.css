@@ -4,6 +4,7 @@ body{
 }
 
 .hero{
+  position: relative;
   height: 200px; 
   background-color: #5274FF;
 }
@@ -13,6 +14,23 @@ body{
   padding-top: 65px; 
   padding-left: 50px;
 }
+a.login{
+  position: absolute;
+  top: 50px;
+  right: 10%;
+  padding: 10px 15px;
+  background-color: #EEE;
+  border-radius: 3px;
+  cursor: pointer;
+}
+a.login:hover{
+  box-shadow: 1px 1px 7px 0px #555;
+}
+a.login:active{
+  box-shadow: -1px -1px 3px 0px #555;
+}
+
+
 .content{
   margin: 0 10%;
 }
@@ -26,4 +44,24 @@ body{
 }
 .deletePlayer form{
   float: left;
+}
+.content .main{
+  width: 60%;
+  float: left;
+}
+.left-bar{
+  float: right;
+  width: 40%;
+}
+
+.chat-container .chat-box{
+  min-height: 200px;
+  border: 1px solid #AAA;
+}
+.chat-container .chat-box p{
+  padding: 0;
+  margin: 0;
+}
+.chat-container form input[name=message]{
+  width: 60%;
 }

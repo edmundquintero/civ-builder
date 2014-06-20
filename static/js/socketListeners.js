@@ -28,13 +28,14 @@ if($('.player').length){
 
 $('form#newPlayer').on('submit', function(e){
   e.preventDefault();
-
+  var form = $(this);
   $.ajax({
     type: 'POST',
     url: '/player',
     data: { name: $('form#newPlayer input[name="name"]').val()},
     success: function(player, message){
       socket.emit('playerAdded', player);
+      form[0].reset();
     },
     dataType: 'json'
   });
@@ -55,4 +56,18 @@ $('.playerContainer').on('submit', 'form', function(e){
   });
 
 });
+
+
+$('form#chatForm').on('submit', function(e){
+  e.preventDefault();
+  socket.emit('newMessage', $(this).children('input[name=message]').val());
+  $(this)[0].reset();
+  $(this).children('input[name=message]').focus();
+});
+
+socket.on('newMessage', function(message){
+  $('.chat-box').append('<p>'+message+'</p>');
+});
+
+
 
