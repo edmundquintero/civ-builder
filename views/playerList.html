@@ -19,9 +19,9 @@
 
   <div class="playerContainer">
     {{#each players}}
-    <div class='player'>
+    <div class='player {{ this._id }}'>
       <div class='deletePlayer'>
-        <form method='POST' action='/player'>
+        <form>
           <input type='hidden' name='_method' value='delete' />
           <input type='hidden' name='id' value='{{this._id}}' />
           <button type='submit'> X </button>

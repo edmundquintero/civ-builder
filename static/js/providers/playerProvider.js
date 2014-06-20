@@ -8,9 +8,10 @@ exports.post = function(req, res){
 
 exports.delete = function(req, res){
   Player.findById(req.body.id, function(err, player) {
-    player.remove(function(err, player){});
+    player.remove(function(err, player){
+      res.send(200, {player: player});
+    })
   });
-  res.redirect('/player');
 };
 
 exports.get = function(req, res){

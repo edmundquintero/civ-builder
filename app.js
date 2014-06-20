@@ -26,7 +26,7 @@ var playerAPI = require('./static/js/providers/playerProvider');
 
 // Routing
 app.get('/', function(req, res) {
-  res.render('index');
+  res.redirect('/player');
 });
 
 app.post('/player', playerAPI.post);
@@ -44,6 +44,13 @@ sio.sockets.on('connection', function(socket){
     socket.broadcast.emit('newPlayer', player);
     socket.emit('newPlayer', player);
   });
+
+  //remove a player
+  socket.on('playerRemoved', function(player){
+    socket.broadcast.emit('playerRemoved', player);
+    socket.emit('playerRemoved', player);
+  });
+
 
   console.log("A socket connected!");
 });
