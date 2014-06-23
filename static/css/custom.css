@@ -14,21 +14,40 @@ body{
   padding-top: 65px; 
   padding-left: 50px;
 }
-a.login{
+.hero a.login, .hero p{
   position: absolute;
   top: 50px;
-  right: 10%;
+  right: 20%;
+}
+.hero p{
+  padding: 0;
+  margin: 0;
+  color: #AAA;
+  font-size: 24px;
+}
+.hero p .profile-link{
+  display: inline-block;
+}
+.hero a.login, .hero a.logout{
   padding: 10px 15px;
   background-color: #EEE;
   border-radius: 3px;
   cursor: pointer;
 }
-a.login:hover{
+a.login:hover, .hero a.logout:hover{
   box-shadow: 1px 1px 7px 0px #555;
 }
-a.login:active{
+a.login:active, .hero a.logout:active{
   box-shadow: -1px -1px 3px 0px #555;
 }
+.hero a.logout{
+  top: 10px;
+  position: absolute;
+  right: 10%;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
 
 
 .content{
@@ -64,4 +83,22 @@ a.login:active{
 }
 .chat-container form input[name=message]{
   width: 60%;
+}
+.login-form{
+  margin: 100px auto 0 auto;
+  width: 50%;
+}
+
+.profile-container{
+  margin: 0 15%;
+}
+.profile-container .profile-info{
+  display: block;
+  margin-top: 20px;
+  font-size: 24px;
+}
+.profile-container .profile-info div{
+  font-weight: bold;
+  width: 20%;
+  display: inline-block;
 }

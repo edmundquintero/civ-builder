@@ -10,7 +10,7 @@ exports.delete = function(req, res){
   Player.findById(req.body.id, function(err, player) {
     player.remove(function(err, player){
       res.send(200, {player: player});
-    })
+    });
   });
 };
 
@@ -23,7 +23,6 @@ exports.get = function(req, res){
 
 exports.list = function(req, res){
    Player.find({},function(err, players) {
-
-    res.render('playerList', { players:players });
+    res.render('playerList', { players:players, user: req.user});
   });
 };

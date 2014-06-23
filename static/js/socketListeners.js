@@ -68,6 +68,3 @@ $('form#chatForm').on('submit', function(e){
 socket.on('newMessage', function(message){
   $('.chat-box').append('<p>'+message+'</p>');
 });
-
-
-

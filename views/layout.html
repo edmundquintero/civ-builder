@@ -15,24 +15,17 @@
 
   <div class="hero">
     <div class="hero-title">Civ Builder</div>
-    <a class="login">Login</a>
+    {{#if user.username}}
+      <p>Welcome, <a class="profile-link" href="/user">{{ user.username }}</a> </p>
+      <a class="logout" href="/logout">Logout</a>
+    {{else}}
+      <a class="login" href="/login">Login</a>
+    {{/if}}
   </div>
 
 </header>
   <div class="content">
-    <div class="main">
-      {{{body}}}
-    </div>
-    <div class="left-bar">
-      <div class="chat-container">
-        <h3>Chat</h3>
-        <div class="chat-box"></div>
-        <form id="chatForm">
-          <input type="text" name="message" />
-          <button type="submit">Send</button>
-        </form>
-      </div>
-    </div>
+    {{{body}}}
   </div>
   
 
