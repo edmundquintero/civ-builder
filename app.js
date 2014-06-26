@@ -36,7 +36,7 @@ passport.use(new LocalStrategy(
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
-      if (!user.validPassword(password)) {
+      if (!user.authenticate(password)) {
         return done(null, false, { message: 'Incorrect password.' });
       }
       return done(null, user);
@@ -90,7 +90,7 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-app.get('/user', ensureAuthenticated, userAPI.get);
+app.get('/profile', ensureAuthenticated, userAPI.get);
 
 app.post('/player', playerAPI.post);
 app.delete('/player', playerAPI.delete);
@@ -106,4 +106,9 @@ var sio = new IoListener(server);
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login');
+}
+
+function isAdmin(req, res, next) {
+  if(req.user.role === 'admin'){ return next(); }
+  res.redirect('/');
 }

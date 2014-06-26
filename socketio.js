@@ -19,9 +19,9 @@ IoListener = function(server) {
     });
 
     //temp Chat
-    socket.on('newMessage', function(message){
-      socket.broadcast.emit('newMessage', message);
-      socket.emit('newMessage', message);
+    socket.on('newMessage', function(data){
+      socket.broadcast.emit('newMessage', data);
+      socket.emit('newMessage', data);
     });
 
     console.log("A socket connected!");

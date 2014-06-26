@@ -60,11 +60,14 @@ $('.playerContainer').on('submit', 'form', function(e){
 
 $('form#chatForm').on('submit', function(e){
   e.preventDefault();
-  socket.emit('newMessage', $(this).children('input[name=message]').val());
+  socket.emit('newMessage', {
+                  message:$(this).children('input[name=message]').val(),
+                  user: $(this).children('input[name=user]').val()
+                });
   $(this)[0].reset();
   $(this).children('input[name=message]').focus();
 });
 
-socket.on('newMessage', function(message){
-  $('.chat-box').append('<p>'+message+'</p>');
+socket.on('newMessage', function(data){
+  $('.chat-box').append('<p><strong>'+data.user+': </strong>'+data.message+'</p>');
 });

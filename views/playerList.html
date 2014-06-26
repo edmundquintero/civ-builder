@@ -41,6 +41,7 @@
     <div class="chat-box"></div>
     <form id="chatForm">
       <input type="text" name="message" />
+      <input type="hidden" name="user" value="{{#if user.username}}{{ user.username }}{{ else }}Anonymous{{/if}}" />
       <button type="submit">Send</button>
     </form>
   </div>
