@@ -26,7 +26,9 @@ exports.get = function(req, res){
 
 exports.list = function(req, res){
    User.find({},function(err, users) {
-
-    res.render('userList', { users:users });
+    if(err){
+      console.log("Failed to load user list.", err);
+    }
+    res.render('index', { users:users, user: req.user });
   });
 };

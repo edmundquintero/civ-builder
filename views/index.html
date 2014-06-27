@@ -1,40 +1,21 @@
 <div class="main">  
-  <div class="row-fluid" id="statsDisplay-container">
-    <div class="span12" id="statsDisplay">
-      <h3 id="statsDisplayCharName"></h3>
-      <ul id="statsDisplayList">
-      </ul>
-    </div>
-  </div>
-  <div>
-    <form method="POST" action="/player">
-      <label>Name:</label>
-      <input type="text" name="name"/>
-      <button type="submit">Create</button>
-    </form>
-    <h1>Player List</h1>
-  </div>
-  <hr />
-
-  <div>
-    {{#each players}}
-
-    <p style="font-size: 20px;">
-      <strong>Name:</strong> {{this.name}}
-    </p>
-
-    {{/each}}
-  </div>
+<h2>Users</h2>
+<div class="userlist">
+  {{#each users}}
+    <div class="username{{#if this.isOnline}} online{{/if}}" data-username="{{ this.username }}">{{ this.username }}</div>
+  {{/each}}
 </div>
 
+</div>
 <div class="left-bar">
   <div class="chat-container">
-    <h3>Chat</h3>
     <div class="chat-box"></div>
-    <form id="chatForm">
-      <input type="text" name="message" />
-      <input type="hidden" name="user" value="{{#if user.username}}{{ user.username }}{{ else }}Anonymous{{/if}}" />
-      <button type="submit">Send</button>
-    </form>
+    <div class="inputContainer">
+      <form id="chatForm">
+        <input type="text" name="message" />
+        <input type="hidden" name="user" value="{{#if user.username}}{{ user.username }}{{ else }}Anonymous{{/if}}" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
   </div>
 </div>

@@ -21,7 +21,11 @@ var userSchema = new Schema({
     enum: ['user', 'admin']
   },
   hashedPassword: String,
-  salt: String
+  salt: String,
+  isOnline: {
+    type: Boolean,
+    default: false
+  }
 });
 
 /**
@@ -36,7 +40,6 @@ userSchema.virtual('password')
   .get(function () {
     return this._password;
   });
-
 
 /**
  * Pre-save hook
@@ -79,6 +82,16 @@ userSchema.methods = {
     if (!password || !this.salt) return '';
     var salt = new Buffer(this.salt, 'base64');
     return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+  },
+
+  logOut: function () {
+    this.isOnline = false;
+    this.save();
+  },
+
+  logIn: function () {
+    this.isOnline = true;
+    this.save();
   }
 
 };

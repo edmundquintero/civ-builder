@@ -1,6 +1,11 @@
+html{
+    min-height:100%;
+    position:relative
+}
 body{
-  padding: 0;
-  margin: 0;
+    height:100%; 
+    padding: 0;
+    margin: 0;
 }
 
 .hero{
@@ -47,9 +52,6 @@ a.login:active, .hero a.logout:active{
   padding: 5px 10px;
   font-size: 16px;
 }
-
-
-
 .content{
   margin: 0 10%;
 }
@@ -72,10 +74,31 @@ a.login:active, .hero a.logout:active{
   float: right;
   width: 40%;
 }
-
-.chat-container .chat-box{
-  min-height: 200px;
+.chat-container {
+  width: 70%;
+  position:absolute;
+  top:225px;
+  bottom:3em;
+  right:5%;
+  overflow-y:scroll;
+  z-index:-1;
+}
+.chat-container .inputContainer, .chat-container .chat-box{
+  position: absolute;
+  left: 0;
+  right:0;
   border: 1px solid #AAA;
+}
+.chat-container .chat-box{
+  overflow:auto;
+  top:0;
+  bottom:3em;
+}
+.chat-container .inputContainer{
+  display:block;
+  bottom:0;
+  padding: 5px;
+  margin-top:1em;
 }
 .chat-container .chat-box p{
   padding: 0;
@@ -101,4 +124,8 @@ a.login:active, .hero a.logout:active{
   font-weight: bold;
   width: 20%;
   display: inline-block;
+}
+.username.online{
+  color: green;
+  font-weight: bold;
 }

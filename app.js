@@ -1,15 +1,14 @@
 var express = require('express'),
     io = require('socket.io'),
-    passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy,
     crypto = require('crypto'),
     User = require('./models/user'),
-    CivBuilderDb = require('./mongo').CivBuilderDb,
-    IoListener = require('./socketio').IoListener;
+    passport = require('passport'),
+    CivBuilderDb = require('./config/mongo').CivBuilderDb,
+    IoListener = require('./config/socketio').IoListener,
+    Utils = require('./config/utils');
 // var methodOverride = require('method-override');
 
 var app = express();
-
 
 // include handelbars for templating
 var hbs = require('hbs');
@@ -28,35 +27,20 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Passport Config
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    username = username.toLowerCase();
-    User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.authenticate(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function (err, user) {
-    done(err, user);
-  });
-});
+var passport = require('./config/passport');
 
 /* 
  * Seed a User
  */
+
+// var user = new User({ username: 'zygorf', email: 'edmundquintero@gmail.com', password: 'pass' });
+// user.save(function(err) {
+//   if(err) {
+//     console.log(err);
+//   } else {
+//     console.log('user: ' + user.username + " saved.");
+//   }
+// });
 
 // var user = new User({ username: 'indist1nct', email: 'jason.g.bibb@gmail.com', password: 'pass' });
 // user.save(function(err) {
@@ -67,48 +51,44 @@ passport.deserializeUser(function(id, done) {
 //   }
 // });
 
-
 // start DB
 var CivBuilderDb = new CivBuilderDb('localhost', 27017);
-
-//Providers
-var playerAPI = require('./providers/playerProvider');
-var userAPI = require('./providers/userProvider');
-
-// Routing
-app.get('/', function(req, res) {
-  res.redirect('/player');
-});
-
-app.post('/login', passport.authenticate('local', { successRedirect: '/',
-                                                    failureRedirect: '/login' }));
-app.get('/login', function(req, res){
-  res.render('login');
-});
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
-
-app.get('/profile', ensureAuthenticated, userAPI.get);
-
-app.post('/player', playerAPI.post);
-app.delete('/player', playerAPI.delete);
-app.get('/player', playerAPI.list);
-
 
 // Start Server
 var server = app.listen(3001);
 // Add Socket.io listener
 var sio = new IoListener(server);
 
-// Authentication utility middleware
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login');
-}
+// Controllers
+var userAPI = require('./controllers/user');
 
-function isAdmin(req, res, next) {
-  if(req.user.role === 'admin'){ return next(); }
+// Routing
+app.get('/', userAPI.list);
+
+app.post('/login',  function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) { return res.redirect('/login'); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      user.logIn();
+      sio.emit('userLogon', {user:user});
+      return res.redirect('/');
+    });
+  })(req, res, next);
+});
+
+app.get('/login', function(req, res){
+  res.render('login');
+});
+
+app.get('/logout', Utils.ensureAuthenticated, function(req, res){
+  User.findOne({ username: req.user.username }, function(err, user) {
+    user.logOut();
+    sio.emit('userLogoff', {user:user});
+  });
+  req.logout();
   res.redirect('/');
-}
+});
+
+app.get('/profile', Utils.ensureAuthenticated, userAPI.get);
