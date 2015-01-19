@@ -10,18 +10,18 @@ body{
 
 .hero{
   position: relative;
-  height: 200px; 
+  height: 100px; 
   background-color: #5274FF;
 }
 .hero .hero-title{
   font-size: 50px; 
   color: #EEE; 
-  padding-top: 65px; 
+  padding-top: 35px; 
   padding-left: 50px;
 }
 .hero a.login, .hero p{
   position: absolute;
-  top: 50px;
+  top: 25px;
   right: 20%;
 }
 .hero p{
