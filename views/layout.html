@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <link rel="stylesheet" type="text/css" href="/css/custom.css">
-  <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
 
-  <title>Civ Builder</title>
-</head>
-<body>
+    <title>Civ Builder</title>
+  </head>
+  <body>
 
-<header>
+    <header>
 
-  <div class="hero">
-    <div class="hero-title">Civ Builder</div>
-    {{#if user.username}}
-      <p>Welcome, <a class="profile-link" href="/profile">{{ user.username }}</a> </p>
-      <a class="logout" href="/logout">Logout</a>
-    {{else}}
-      <a class="login" href="/login">Login</a>
-    {{/if}}
-  </div>
+      <div class="hero">
+        <div class="hero-title lipsmed leftlg">Civ Builder</div>
+        <div class='hero-menu rightlg lipsmed'>
+          {{#if user.username}}
+            <p>Welcome, <a class="profile-link" href="/profile">{{ user.username }}</a> </p>
+            <a class="logout" href="/logout">Logout</a>
+          {{else}}
+            <a class="login" href="/login">Login</a>
+          {{/if}}
+        </div>
+      </div>
 
-</header>
-  <div class="content">
-    {{{body}}}
-  </div>
-  
+    </header>
+    <div class="content">
+      {{{body}}}
+    </div>
 
-  <script src="/js/jquery-1.11.0.min.js"></script>
-  <script src="https://cdn.socket.io/socket.io-1.0.4.js"></script>
-  <script src="/js/socketListeners.js"></script>  
-</body>
+    <script src="/js/jquery-1.11.0.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.0.4.js"></script>
+    <script src="/js/socketListeners.js"></script>
+    <script src="/js/utils.js"></script>
+  </body>
 
 </html>

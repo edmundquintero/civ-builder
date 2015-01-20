@@ -1,14 +1,37 @@
-<div class="main">  
-<h2>Users</h2>
-<div class="userlist">
-  {{#each users}}
-    <div class="username{{#if this.isOnline}} online{{/if}}" data-username="{{ this.username }}">{{ this.username }}</div>
-  {{/each}}
-</div>
 
-</div>
-<div class="left-bar">
-  <div class="chat-container">
+<div class="left-bar closed">
+  <ul id='player-menu' class='lipssm'>
+    <li data-target='profile'><span class='icon'></span>Profile</li>
+    <li data-target='inventory'><span class='icon'></span>Inventory</li>
+    <li data-target='resources'><span class='icon'></span>Resources</li>
+  </ul>
+
+  <div class='left-bar-content'>
+    
+    <div id='profile' class='left-bar-content-area'>pppppprrrofilefilefile</div>
+    <div id='inventory' class='left-bar-content-area'> iiiiiinventoroyoroyoroy</div>
+    <div id='resources'class='left-bar-content-area'> rrreesssooouuurrrccceeessssss</div>
+
+
+  </div>
+
+ </div>
+
+<div class="main">  
+  <h2>Users</h2>
+  <div class="userlist">
+    {{#each users}}
+      <div class="username{{#if this.isOnline}} online{{/if}}" data-username="{{ this.username }}">{{ this.username }}</div>
+    {{/each}}
+  </div>
+
+  <div>
+    <button id='newPeon'>New Peon</button>
+    <span id='peonCount'>0</span>
+  </div>
+  <div>Foodcount: <span id='foodcount'>0</span></div>
+
+ <div class="chat-container">
     <div class="chat-box"></div>
     <div class="inputContainer">
       <form id="chatForm">
@@ -18,4 +41,7 @@
       </form>
     </div>
   </div>
+
+
 </div>
+

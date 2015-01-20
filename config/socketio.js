@@ -10,6 +10,10 @@ IoListener = function(server) {
       socket.broadcast.emit('newMessage', data);
       socket.emit('newMessage', data);
     });
+    socket.on('newPeon', function(data){
+      socket.broadcast.emit('newPeon', data);
+      socket.emit('newPeon', data);
+    });
 
     console.log("A socket connected!");
   });
